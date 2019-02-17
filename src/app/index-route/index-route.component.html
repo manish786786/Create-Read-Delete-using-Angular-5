@@ -1,0 +1,13 @@
+<span style="font-size:30px;cursor:pointer;float: right;" id="main" (click)="openNav()">&#9776; Menu</span>
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+  <a routerLink="/dashboard" (click)="closeNav()">Dashboard</a>
+  <a routerLink="/alias" (click)="closeNav()">Alias</a>
+  <a routerLink="/file-upload" (click)="closeNav()">file-upload</a>
+  <a routerLink="/interface" (click)="closeNav()">interface</a>
+  <a routerLink="/protocols" (click)="closeNav()">protocols</a>
+  <a routerLink="/settings" (click)="closeNav()">settings</a>
+  <a routerLink="/custom" (click)="closeNav()">custom</a>
+  <a routerLink="/Users" (click)="closeNav()">Users</a>
+</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,36 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 75%;
+    border-radius: 0px;
+    margin-left: 12px;
+    background: #948b8b
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+
+  .cardAdjust{
+    margin-left: 35px;
+    max-width: 939px;
+}
+
+.table {
+    width: 90%;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+.card1 {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 75%;
+  border-radius: 0px;
+  margin-left: 12px;
+  background: #ffffff
+}
+
+.card1:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}

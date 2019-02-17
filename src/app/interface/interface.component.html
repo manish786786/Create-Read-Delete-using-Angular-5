@@ -1,0 +1,180 @@
+<div>
+  <div style="margin-left: 10px;margin-top: 10px;">
+    <button type="button" class="btn btn-danger  btn-lg"><i class="fas fa-sign-out-alt" style="margin-right: 7px;"></i>Logout</button>
+  </div>
+
+  <br><br><br><br>
+  <div style="display: flex; justify-content: space-between;max-width: 992px;">
+      <div style="margin-left: 10px;margin-top: 10px;">
+          <button *ngIf="AddBtn" type="button" class="btn btn-info btn-lg" style="border-radius: 1px;" (click)="SaveNAdd()">Add More Rule</button>
+        </div>
+        <div style="margin-top: 22px;">
+          <h4><strong style="color:red">All Columns are Mandatory</strong></h4>
+        </div>
+        <div style="    margin-top: 22px;" style="display: flex;height: 34px;margin-top: 22px;">
+            <input placeholder="Search by Protocol"   type="text"  (keyup)="filterItem()" [(ngModel)]="protocolll" class="form-control">
+          <!-- <button type="button" class="btn btn-danger" (click)="filterItem()">Search</button> -->
+        </div>
+  </div>
+  
+    <br>
+  <div class="card" style="padding-bottom:10px;">
+      <div *ngIf="!filterShow && !nextt">
+    <table class="table table-striped  table-hover cardAdjust">
+      <thead>
+        <tr>
+          <th>Sr no.</th>
+          <th>Protocol</th>
+          <th>Source IP</th>
+          <th>Destination IP</th>
+          <th>Access Type</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <br>
+      <tbody>
+        <tr class="card1" >
+          <td *ngIf="!numberrShow">1</td>
+            <td *ngIf="numberrShow">{{numberr}}</td>
+          <td><select class="form-control form-control-primary" (click)="protocoll()" [(ngModel)]="protocol">
+              <!-- <option value="none">None</option> -->
+              <option value="IP">IP</option>
+              <option value="IPR">IPR</option>
+              <option value="IPV4">IPV4</option>
+            </select></td>
+          <td><input type="text"  placeholder="Enter Source IP" (keyup)="ValidateIPaddress('d')" class="form-control" [(ngModel)]="sourceIP"></td>
+          <td><input type="text" (keyup)="ValidateIPaddress('s')" placeholder="Enter Destination IP" class="form-control" [(ngModel)]="destinationIP"></td>
+          <td><select class="form-control form-control-primary" [(ngModel)]="accessType" (click)="accessTypee()">
+              <!-- <option value="none">None</option> -->
+              <option value="Denied">Denied</option>
+              <option value="Permit">Permit</option>
+            </select></td>
+          <td><i class="fas fa-trash-alt"></i></td>
+        </tr>
+        <br>
+        <tr  class="card1" *ngFor="let data of mainArray let i = index">
+            <td>{{data.srNo+1}}</td>
+            <td><input type="text" class="form-control"  [(ngModel)]="data.protocol" readonly></td>
+          <!-- <td><select class="form-control form-control-primary">
+              <option value="IP">Ip</option>
+              <option value="IPR">IPR</option>
+              <option value="IPV4">IPV4</option>
+            </select></td> -->
+          <td><input type="text" class="form-control" [(ngModel)]="data.sourceIP" readonly></td>
+          <td><input type="text" class="form-control" [(ngModel)]="data.destinationIP" readonly></td>
+          <td><input type="text" class="form-control" [(ngModel)]="data.accessType" readonly></td>
+          <!-- <td><select class="form-control form-control-primary">
+              <option value="denied">Denied</option>
+              <option value="permit">permit</option>
+            </select></td> -->
+            <td><i class="fas fa-trash-alt" (click)="deleteInput(i)" style="color: red;"></i></td>
+            <br>
+        </tr>
+
+      </tbody>
+    </table>
+</div>
+    <div *ngIf="filterShow && !nextt">
+        <table class="table table-striped  table-hover cardAdjust">
+            <thead>
+                <tr>
+                  <th>Sr no.</th>
+                  <th>Protocol</th>
+                  <th>Source IP</th>
+                  <th>Destination IP</th>
+                  <th>Access Type</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+            <tr class="card1" >
+                <td *ngIf="!numberrShow">1</td>
+                  <td *ngIf="numberrShow">{{numberr}}</td>
+                <td><select class="form-control form-control-primary" (click)="protocoll()" [(ngModel)]="protocol">
+                    <!-- <option value="none">None</option> -->
+                    <option value="IP">IP</option>
+                    <option value="IPR">IPR</option>
+                    <option value="IPV4">IPV4</option>
+                  </select></td>
+                <td><input type="text"  placeholder="Enter Source IP" (keyup)="ValidateIPaddress('d')" class="form-control" [(ngModel)]="sourceIP"></td>
+                <td><input type="text" (keyup)="ValidateIPaddress('s')" placeholder="Enter Destination IP" class="form-control" [(ngModel)]="destinationIP"></td>
+                <td><select class="form-control form-control-primary" [(ngModel)]="accessType" (click)="accessTypee()">
+                    <!-- <option value="none">None</option> -->
+                    <option value="Denied">Denied</option>
+                    <option value="Permit">Permit</option>
+                  </select></td>
+                <td><i class="fas fa-trash-alt"></i></td>
+              </tr>
+              <br>
+            <tr  class="card1" *ngFor="let data of filteredItems let i = index">
+                    
+                       <td>{{data.srNo+1}}</td>
+                       <td><input type="text" class="form-control"  [(ngModel)]="data.protocol" readonly></td>
+                    
+                     <td><input type="text" class="form-control" [(ngModel)]="data.sourceIP" readonly></td>
+                     <td><input type="text" class="form-control" [(ngModel)]="data.destinationIP" readonly></td>
+                     <td><input type="text" class="form-control" [(ngModel)]="data.accessType" readonly></td>
+                    
+                       <td><i class="fas fa-trash-alt" (click)="deleteInput(i)" style="color: red;"></i></td>
+                       <br>
+                  
+                   </tr>
+               </table>
+    </div>
+
+    <div *ngIf="nextt && !filterShow">
+        <table class="table table-striped  table-hover cardAdjust">
+            <thead>
+                <tr>
+                  <th>Sr no.</th>
+                  <th>Protocol</th>
+                  <th>Source IP</th>
+                  <th>Destination IP</th>
+                  <th>Access Type</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+            <tr class="card1" >
+                <td *ngIf="!numberrShow">1</td>
+                  <td *ngIf="numberrShow">{{numberr}}</td>
+                <td><select class="form-control form-control-primary" (click)="protocoll()" [(ngModel)]="protocol">
+                    <!-- <option value="none">None</option> -->
+                    <option value="IP">IP</option>
+                    <option value="IPR">IPR</option>
+                    <option value="IPV4">IPV4</option>
+                  </select></td>
+                <td><input type="text"  placeholder="Enter Source IP" (keyup)="ValidateIPaddress('d')" class="form-control" [(ngModel)]="sourceIP"></td>
+                <td><input type="text" (keyup)="ValidateIPaddress('s')" placeholder="Enter Destination IP" class="form-control" [(ngModel)]="destinationIP"></td>
+                <td><select class="form-control form-control-primary" [(ngModel)]="accessType" (click)="accessTypee()">
+                    <!-- <option value="none">None</option> -->
+                    <option value="Denied">Denied</option>
+                    <option value="Permit">Permit</option>
+                  </select></td>
+                <td><i class="fas fa-trash-alt"></i></td>
+              </tr>
+              <br>
+            <tr  class="card1" *ngFor="let data of arr let i = index">
+                    
+                       <td>{{data.srNo+1}}</td>
+                       <td><input type="text" class="form-control"  [(ngModel)]="data.protocol" readonly></td>
+                    
+                     <td><input type="text" class="form-control" [(ngModel)]="data.sourceIP" readonly></td>
+                     <td><input type="text" class="form-control" [(ngModel)]="data.destinationIP" readonly></td>
+                     <td><input type="text" class="form-control" [(ngModel)]="data.accessType" readonly></td>
+                    
+                       <td><i class="fas fa-trash-alt" (click)="deleteInput(i)" style="color: red;"></i></td>
+                       <br>
+                  
+                   </tr>
+               </table>
+    </div>
+
+    <div style="float: right;">
+        <div  style="display: flex; justify-content: flex-end;margin-top: 24px;">
+            <button  (click)="prev()" *ngIf="pre" class="btn btn btn-info " style="margin-right: 20px;">Prev</button>
+            <button  (click)="next()" class="btn btn btn-info ">Next</button>
+          </div>
+          
+    </div>
+  </div>
+  
+</div>
